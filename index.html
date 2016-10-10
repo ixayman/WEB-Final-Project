@@ -1,0 +1,50 @@
+<html ng-app="app">
+	<title>WEB-Final-Project</title>
+	<head>
+		<link rel="stylesheet" href="css/style.css" charset="utf-8"/>
+	</head>
+	
+	<body>
+		<header>
+			<div>
+			<div><a href="#">Tasks</a></div>
+			<div><a href="#">Diary</a></div>
+			<div><a href="#">Quotes</a></div></div>
+		</header><br><hr>
+		
+		<div id="tasks" ng-controller="tasks">
+			<div id="left-panel">
+				<div>category 1</div>
+				<div>category 2</div>
+				<div>category 3</div>
+				<div>category 4</div>
+				<div>category 5</div>
+			</div>
+			<div id="tasks-content">
+				<div>
+					<div>Add task:</div>
+					<br>
+					<textarea ng-model="taskContent" rows="4" cols="50"></textarea>
+					<br><hr>
+					<button ng-click="getTask()">Save</button>
+				</div>
+				<div>{{taskContent}}///*{{time}}*///*{{taskC}}*</div>
+			</div>
+			<!--events api-->
+			<div id="events-api"></div>
+			
+		</div>
+		<div ng-controller="diary"></div>
+		<div ng-controller="quotes"></div>
+		
+		
+		
+		
+		<script src="node_modules/angular/angular.js"></script>
+		<script src="app/config.js"></script>
+		<script src="app/controllers/tasks.js"></script>
+		<script src="app/controllers/diary.js"></script>
+		<script src="app/controllers/quotes.js"></script>
+		
+	</body>
+</html>
