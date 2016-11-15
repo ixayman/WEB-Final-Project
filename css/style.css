@@ -39,10 +39,24 @@ header div div:hover
 {
 	width:88%;
 	float:right;
-	    border: 2px solid black;
+	border: 2px solid black;
 	height:90%;
+	overflow: visible;
+	overflow-y :scroll;
 }
 #tasks-content div
 {
 	margin-left:3px;
 }
+.clear-box
+{
+	clear:both;
+	overflow: hidden;
+}
+#test
+{
+	position: fixed;
+	float:left;
+	
+}
+

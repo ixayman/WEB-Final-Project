@@ -1,50 +1,131 @@
 <html ng-app="app">
 	<title>WEB-Final-Project</title>
 	<head>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="css/style.css" charset="utf-8"/>
+		<link rel="stylesheet" href="css/bootstrap.min.css" charset="utf-8"/>
+		<link rel="stylesheet" href="css/angular-moment-picker.min.css" charset="UTF-8"/>
+
 	</head>
-	
 	<body>
 		<header>
 			<div>
-			<div><a href="#">Tasks</a></div>
-			<div><a href="#">Diary</a></div>
-			<div><a href="#">Quotes</a></div></div>
-		</header><br><hr>
-		
+				<div>
+					<a href="#tasks">Tasks</a>
+				</div>
+				<div>
+					<a href="#diary">Diary</a>
+				</div>
+				<div>
+					<a href="#quotes">Quotes</a>
+				</div>
+			</div>
+		</header>
+		<br>
+		<hr>
+
 		<div id="tasks" ng-controller="tasks">
 			<div id="left-panel">
-				<div>category 1</div>
-				<div>category 2</div>
-				<div>category 3</div>
-				<div>category 4</div>
-				<div>category 5</div>
-			</div>
-			<div id="tasks-content">
 				<div>
-					<div>Add task:</div>
-					<br>
-					<textarea ng-model="taskContent" rows="4" cols="50"></textarea>
-					<br><hr>
-					<button ng-click="getTask()">Save</button>
+					category 1
 				</div>
-				<div>{{taskContent}}///*{{time}}*///*{{taskC}}*</div>
+				<div>
+					category 2
+				</div>
+				<div>
+					category 3
+				</div>
+				<div>
+					category 4
+				</div>
+				<div>
+					category 5
+				</div>
 			</div>
-			<!--events api-->
-			<div id="events-api"></div>
-			
-		</div>
-		<div ng-controller="diary"></div>
-		<div ng-controller="quotes"></div>
+			<div id="tasks-content" style="position: relative;">
+				
+				<button type="button" class="btn btn-info btn-lg"  id="test" data-toggle="modal" data-target="#add-task" >
+					Add task
+				</button>
 		
-		
-		
-		
-		<script src="node_modules/angular/angular.js"></script>
-		<script src="app/config.js"></script>
-		<script src="app/controllers/tasks.js"></script>
-		<script src="app/controllers/diary.js"></script>
-		<script src="app/controllers/quotes.js"></script>
-		
+				<div id="add-task" class="modal fade" role="dialog">
+					<div style="margin: 10px auto" class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">
+									&times;
+								</button>
+								<h2 class="modal-title">New task</h2>
+							
+							</div>
+							<div class="modal-body">
+								<div>
+									format: time-task
+								</div>
+								<br>
+
+								<br>
+								H:
+								<input ng-model="taskH" type="number" min="0" max="23"/>
+								M:
+								<input ng-model="taskM" type="number" min="0" max="59"/>
+								D:
+								<input ng-model="taskD" type="number" min="1" max="31"/>
+								MON:
+								<input ng-model="taskMO" type="number" min="1" max="12"/>
+								Y:
+								<input ng-model="taskY" type="number" min="2000" max="2500"/>
+								<!-- <input ng-model="taskDT" type="datetime-local"/>-->
+								<br>
+								<br>
+								<br>
+								<textarea ng-model="taskContent" rows="4" cols="50"></textarea>
+								<br>
+								<hr>
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="getTask()">
+									Save
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="current-tasks" class="card" ng-repeat="x in Tasks">
+					<div style="margin-left:0;">
+						<div class="card-block" style="background-color: grey ">
+						<div class="card-title">
+						task {{TL}}:  When {{x[0][0]}}  {{x[0][1]}}
+						</div>
+						<div class="card-text">
+						
+						task: {{x[1]}}
+						<br>
+						<hr>
+						</div>
+						</div>
+					</div>
+
+					<!--events api-->
+					<div id="events-api"></div>
+
+				</div>
+			</div>
+				<!-- <div ng-controller="diary"></div>
+				<div ng-controller="quotes"></div>-->
+
+				<script src="node_modules/angular/angular.js"></script>
+				<script src="node_modules/angular-route/angular-route.js"></script>
+				<script src="app/config.js"></script>
+				<script src="app/controllers/tasks.js"></script>
+				<!-- <script src="app/controllers/diary.js"></script>
+				<script src="app/controllers/quotes.js">
+				</script> -->
+				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+				<script src="js/bootstrap.min.js"></script>
+
 	</body>
 </html>
