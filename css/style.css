@@ -1,12 +1,9 @@
-.mainTitle a
-{
-	font-size:20px;
-	color: red;
-}
-body
+#body
 {
 	width:100%;
+	background-color:#E5E4E2;
 }
+
 header div
 {
     width: 15%;
@@ -19,35 +16,31 @@ header div div
     width: 33.3333333%;
     text-align: center;
 }
-header div div a
-{
-	text-decoration:none;
-	color:#333;
-}
-header div div:hover
-{
-	background-color: #333;
-}
+
 #tasks
 {
 	width:98%;
 	height:80%;
+	
 }
 #left-panel
 {
 	width:10%;
 	float:left;
-	border: 2px solid black;
+	/*border: 2px solid black;*/
+	background-color: #6a8289;
 	height:90%;
+	
 }
 #tasks-content
 {
 	width:88%;
 	float:right;
-	border: 2px solid black;
+	/*border: 2px solid black;*/
 	height:90%;
 	overflow: visible;
 	overflow-y :scroll;
+	background-color: #6a8289;
 }
 #tasks-content div
 {
@@ -68,4 +61,22 @@ header div div:hover
 #finished
 {
 	float:right;
+}
+.inner-buttons
+{
+	float:right;
+	margin-left:4px;
+}
+.modal-body input 
+{
+	padding: 12px 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 20px;
+}
+.modal-body textarea 
+{
+	padding: 12px 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }

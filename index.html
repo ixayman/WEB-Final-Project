@@ -3,33 +3,31 @@
 	<head>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="css/style.css" charset="utf-8"/>
+		<link rel="stylesheet" href="css/style.css" charset="UTF-8"/>
 		<link rel="stylesheet" href="css/bootstrap.min.css" charset="utf-8"/>
 		<link rel="stylesheet" href="css/angular-moment-picker.min.css" charset="UTF-8"/>
 
 	</head>
-	<body>
+	
+	
+	<body id="body">
 		<header>
 			<div>
-				<div class="mainTitle">
-					<a href="#tasks">Tasks</a>
-				</div>
-				<!-- <div>
-					<a href="#diary">Diary</a>
-				</div> -->
-				<div class="mainTitle">
+				<button class="btn btn-link btn-lg">
+					<a href="#">tasks</a>
+				</button>
+				<button class="btn btn-link btn-lg">
 					<a href="#Notes">Notes</a>
-				</div>
+				</button>
 			</div>
 		</header>
-		<br>
-		<hr>
+		
 		
 		<div id="tasks" ng-controller="tasks">
-			<div id="finished">
-				<a href="#">Done Tasks</a></div>
+			<a href="#doneTasks">Done Tasks</a>
+			<div ng-view></div>
 				<div class="clear-box"></div>
-			<div id="left-panel">
+			<div id="left-panel" class="well well-lg">
 				<div>
 					category 1
 				</div>
@@ -46,12 +44,13 @@
 					category 5
 				</div>
 			</div>
-			<div id="tasks-content" style="position: relative;">
-				
-				<button type="button" class="btn btn-info btn-lg"  id="test" data-toggle="modal" data-target="#add-task" >
+			<button type="button" class="btn btn-primary btn-md "  id="test" data-toggle="modal" data-target="#add-task" >
 					Add task
 				</button>
-		
+			<div id="tasks-content" style="position: relative;" class="well well-lg">
+				
+				
+		<!-- adding a task -->
 				<div id="add-task" class="modal fade" role="dialog">
 					<div style="margin: 10px auto" class="modal-dialog">
 						<div class="modal-content">
@@ -64,25 +63,11 @@
 							</div>
 							<form>
 							<div class="modal-body">
-								<div>
-									format: time-task
-								</div>
-								<br>
-
-								<br>
 								
-								H:
-								<input ng-model="taskH" type="number" required min="0" max="23"/>
-								M:
-								<input ng-model="taskM" type="number" required min="0" max="59"/>
-								D:
-								<input ng-model="taskD" type="number" required min="1" max="31"/>
-								MON:
-								<input ng-model="taskMO" type="number" required min="1" max="12"/>
-								Y:
-								<input ng-model="taskY" type="number" required min="2000" max="2500"/>
-								<!-- <input ng-model="taskDT" type="datetime-local"/>-->
 								<br>
+								<br>
+								<input ng-model="taskdate" type="datetime-local"/>
+								
 								<br>
 								<br>
 								<textarea ng-model="taskContent" rows="4" cols="50"></textarea>
@@ -100,36 +85,41 @@
 						</div>
 					</div>
 				</div>
-
-				<div id="current-tasks" class="card" ng-repeat="x in Tasks">
-					<div style="margin-left:0;">
-						<div class="card-block" style="background-color: grey ">
-						<div class="card-title">
-						  When: {{x[0][0]}}  |  {{x[0][1]}}
-						<div class="card-text">
+				<!-- show active task-->
+				<div id="current-tasks" class="card" ng-repeat="task in Tasks track by $index">
+					<div >
+						<div class="panel panel-info" >
+						<div class="panel-heading">
+							<div><input type="datetime-local" ng-model='task.date' ng-show="showEdit"/></div>
+							<div ng-show="!showEdit">{{task.date|date:'medium'}}</div>
+							</div>
 						
-						task: {{x[1]}}
+						<div class="panel-body">
+						<div><textarea rows="4" cols="50" ng-model='task.content' ng-show="showEdit"></textarea> </div>
+						<div ng-show="!showEdit">task: {{task.content}}</div>
 						<br>
-						<hr>
-						</div>
+						<button class="btn btn-success btn-xs inner-buttons glyphicon glyphicon-ok" type="button" ng-click="doneTask(task)"></button>
+						<button class="btn btn-danger btn-xs inner-buttons glyphicon glyphicon-remove" type="button" ng-click="removeTask(task)"></button>
+						<button class="btn btn-info btn-xs inner-buttons glyphicon glyphicon-pencil" ng-click="showEdit=!showEdit" ng-show="!showEdit"></button>
+						<button class="btn btn-info btn-xs inner-buttons" class="inner-buttons" ng-click="showEdit=!showEdit" ng-show="showEdit">Save</button>
+						
 						</div>
 					</div>
-
+					
 					<!--events api-->
 					<div id="events-api"></div>
 
 				</div>
 			</div>
-				<!-- <div ng-controller="diary"></div>
-				<div ng-controller="quotes"></div>-->
-
+				<!--
+				<div ng-controller="notes"></div>-->
+<!-- scripts -->
 				<script src="node_modules/angular/angular.js"></script>
 				<script src="node_modules/angular-route/angular-route.js"></script>
 				<script src="app/config.js"></script>
 				<script src="app/controllers/tasks.js"></script>
-				<!-- <script src="app/controllers/diary.js"></script>
-				<script src="app/controllers/quotes.js">
-				</script> -->
+				<script src="app/controllers/doneTasks.js"></script>
+				<script src="app/controllers/notes.js"></script>
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 				<script src="js/bootstrap.min.js"></script>
 

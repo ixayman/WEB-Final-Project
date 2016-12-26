@@ -1,34 +1,56 @@
-(function(){
+(function() {
 	var task = angular.module("app");
-	task.controller("tasks",tasks);
+	task.controller("tasks", tasks);
+
+	function tasks($scope, $timeout) {
 	
-	function tasks($scope, $timeout){
-		$scope.Tasks=[];
-		$scope.Tasks=localStorage.getItem('Tasks');
-		$scope.Tasks=JSON.parse($scope.Tasks);
-		if($scope.Tasks===null)
-		{
-			$scope.Tasks=[];
+		
+		$scope.showEdit = false;
+		Array.prototype.remove = function(v) {
+			if (this.indexOf(v) != -1) {
+				this.splice(this.indexOf(v), 1);
+				return true;
+			}
+			return false;
+		};
+
+		$scope.Tasks = [];
+		var alltasks = localStorage.getItem('Tasks');
+		$scope.Tasks = JSON.parse(alltasks);
+		if ($scope.Tasks === null) {
+			$scope.Tasks = [];
 		}
-		
-		
-		console.log("Tasks:  " +$scope.Tasks)
-		$scope.taskH="";
-		$scope.taskM="";
-		$scope.taskD="";
-		$scope.taskMO="";
-		$scope.taskY="";
-		$scope.taskContent="";
-		$scope.TL=[]
-		$scope.getTask=function(){
-			$scope.date=[$scope.taskH.toString() + ":" + $scope.taskM.toString(),$scope.taskD.toString()+"-"+$scope.taskMO.toString()+"-"+$scope.taskY.toString()]
-			$scope.Task=[$scope.date,$scope.taskContent]
-			
-			$scope.Tasks.unshift($scope.Task);
-			$scope.TL.unshift($scope.Tasks.length);
+
+		console.log("Tasks:  " + alltasks)
+		$scope.taskdate = "";
+		$scope.taskContent = "";
+		$scope.doneTasks = [];
+		$scope.getTask = function() { //process of adding a new task
+
+			var myDate = $scope.taskdate;
+
+			var task = {
+				date : myDate,
+				content : $scope.taskContent
+			}
+
+			$scope.Tasks.unshift(task);
 			localStorage.setItem('Tasks', JSON.stringify($scope.Tasks));
+			console.log("showedit:  ", $scope.showEdit)
 
 		};
-		
+		//removing a task
+		$scope.removeTask = function(task) {
+			$scope.Tasks.remove(task)
+			localStorage.setItem('Tasks', JSON.stringify($scope.Tasks));
+		}
+		//mark task as done + remove it from active tab
+		$scope.doneTask = function(task){
+			$scope.Tasks.remove(task)
+			localStorage.setItem('Tasks', JSON.stringify($scope.Tasks));
+			$scope.doneTasks.unshift(task);
+			localStorage.setItem('doneTasks', JSON.stringify($scope.doneTasks));
+		}
 	}
-	})();
+
+})();

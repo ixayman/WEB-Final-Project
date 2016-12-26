@@ -1,0 +1,22 @@
+	<div ng-controller='doneTasks'>
+	<div id="finished-tasks" class="card" ng-repeat="task in finished track by $index">
+					<div >
+						will it show
+						<div class="panel panel-info" >
+						<div class="panel-heading">
+							
+							<div >{{task.date|date:'medium'}}</div>
+							</div>
+						
+						<div class="panel-body">
+					
+						<div >task: {{task.content}}</div>
+						<br>
+						</div>
+					</div>
+					
+					</div>
+
+				</div>
+			</div>
+	
